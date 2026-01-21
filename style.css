@@ -14,8 +14,8 @@ h1{
 
 #string {
   width: 1000px;
-  height: 450px;
-  margin: auto;
+  height: 400px;
+  margin: 0 auto;
   border: 1px solid rgba(255, 255, 255, 0.195);
 }
 
@@ -26,4 +26,12 @@ h1{
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  opacity: 0;
+}
+
+h2{
+  color: white;
+  text-align: center;
+  margin-top: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
