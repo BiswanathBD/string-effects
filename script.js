@@ -95,5 +95,7 @@ audioToggle.addEventListener("click", () => {
   if (!audioEnabled) {
     audio.currentTime = 5;
   }
-  audioToggle.textContent = audioEnabled ? "🔊" : "🔇";
+  audioToggle.innerHTML = audioEnabled
+    ? '<img src="/unmute.svg" alt="" />'
+    : '<img src="/mute.svg" alt="" />';
 });
