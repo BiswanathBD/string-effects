@@ -3,9 +3,12 @@ let string = document.querySelector("#string");
 
 function getRelativePos(e) {
   const rect = string.getBoundingClientRect();
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
   return {
-    x: e.clientX - rect.left,
-    y: e.clientY - rect.top,
+    x: clientX - rect.left,
+    y: clientY - rect.top,
   };
 }
 
@@ -33,9 +36,11 @@ string.addEventListener("mouseleave", (e) => {
 
 // touch and move event
 string.addEventListener("touchmove", (e) => {
-  console.log(e);
+  let { x, y } = getRelativePos(e);
+  const rect = string.getBoundingClientRect();
+  y = (y / rect.height) * 400;
 
-  let path = `M 10 200 Q ${e.touches[0].clientX} ${e.touches[0].clientY} 990 200`;
+  let path = `M 10 200 Q ${x} ${y} 990 200`;
   console.log(e);
   gsap.to("svg path", {
     attr: { d: path },
@@ -55,7 +60,7 @@ string.addEventListener("touchend", (e) => {
 // cursor follow effect
 document.body.addEventListener("mousemove", (e) => {
   gsap.to("#cursor", {
-    x: e.x-10,
+    x: e.x - 10,
     y: e.y - 50,
     duration: 0.3,
     opacity: 1,
