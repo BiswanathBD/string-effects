@@ -31,7 +31,7 @@ string.addEventListener("mouseleave", (e) => {
   });
 });
 
-// touch move event
+// touch and move event
 string.addEventListener("touchmove", (e) => {
   console.log(e);
 
@@ -43,7 +43,7 @@ string.addEventListener("touchmove", (e) => {
   });
 });
 
-// mouse leave event
+// touch end event
 string.addEventListener("touchend", (e) => {
   gsap.to("svg path", {
     attr: { d: initialpath },
@@ -55,16 +55,16 @@ string.addEventListener("touchend", (e) => {
 // cursor follow effect
 document.body.addEventListener("mousemove", (e) => {
   gsap.to("#cursor", {
-    x: e.x,
-    y: e.y,
-    duration: 0.5,
+    x: e.x-10,
+    y: e.y - 50,
+    duration: 0.3,
     opacity: 1,
   });
 });
-// cursor follow effect
+// cursor leave effect
 document.body.addEventListener("mouseleave", (e) => {
   gsap.to("#cursor", {
-    duration: 0.5,
+    duration: 0.3,
     opacity: 0,
   });
 });
