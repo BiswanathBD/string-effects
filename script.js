@@ -1,10 +1,9 @@
 let initialPath = "M 10 200 Q 500 200 990 200";
 let string = document.querySelector("#string");
+const audio = new Audio("guitar-pluck.mp3");
 
 function getRelativePos(e) {
   const rect = string.getBoundingClientRect();
-  console.log(rect);
-
   const clientX = e.touches ? e.touches[0].clientX : e.clientX;
   const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
@@ -35,25 +34,26 @@ string.addEventListener("mouseleave", (e) => {
     duration: 1.8,
     ease: "elastic.out(1,0.1)",
   });
+  if (audioEnabled) {
+    audio.currentTime = 0;
+    audio.play();
+  }
 });
 
 // touch and move event
-string.addEventListener(
-  "touchmove",
-  (e) => {
-    let { x, y } = getRelativePos(e);
-    const rect = string.getBoundingClientRect();
-    x = (x / rect.width) * 1000;
-    y = (y / rect.height) * 400;
+string.addEventListener("touchmove", (e) => {
+  let { x, y } = getRelativePos(e);
+  const rect = string.getBoundingClientRect();
+  x = (x / rect.width) * 1000;
+  y = (y / rect.height) * 400;
 
-    let path = `M 10 200 Q ${x} ${y} 990 200`;
-    console.log(e);
-    gsap.to("svg path", {
-      attr: { d: path },
-      duration: 0.3,
-    });
-  },
-);
+  let path = `M 10 200 Q ${x} ${y} 990 200`;
+  console.log(e);
+  gsap.to("svg path", {
+    attr: { d: path },
+    duration: 0.3,
+  });
+});
 
 // touch end event
 string.addEventListener("touchend", (e) => {
@@ -62,6 +62,10 @@ string.addEventListener("touchend", (e) => {
     duration: 1.8,
     ease: "elastic.out(1,0.1)",
   });
+  if (audioEnabled) {
+    audio.currentTime = 0;
+    audio.play();
+  }
 });
 
 // cursor follow effect
@@ -73,10 +77,23 @@ document.body.addEventListener("mousemove", (e) => {
     opacity: 1,
   });
 });
+
 // cursor leave effect
 document.body.addEventListener("mouseleave", (e) => {
   gsap.to("#cursor", {
     duration: 0.3,
     opacity: 0,
   });
+});
+
+// Audio toggle functionality
+let audioEnabled = false;
+const audioToggle = document.getElementById("audioToggle");
+
+audioToggle.addEventListener("click", () => {
+  audioEnabled = !audioEnabled;
+  if (!audioEnabled) {
+    audio.currentTime = 5;
+  }
+  audioToggle.textContent = audioEnabled ? "🔊" : "🔇";
 });
