@@ -34,9 +34,9 @@ string.addEventListener("mouseleave", (e) => {
     duration: 1.8,
     ease: "elastic.out(1,0.1)",
   });
-  if (audioEnabled) {
+  if (audioEnabled && audioUnlocked) {
     audio.currentTime = 0;
-    audio.play();
+    audio.play().catch(() => {});
   }
 });
 
@@ -62,9 +62,9 @@ string.addEventListener("touchend", (e) => {
     duration: 1.8,
     ease: "elastic.out(1,0.1)",
   });
-  if (audioEnabled) {
+  if (audioEnabled && audioUnlocked) {
     audio.currentTime = 0;
-    audio.play();
+    audio.play().catch(() => {});
   }
 });
 
@@ -88,13 +88,23 @@ document.body.addEventListener("mouseleave", (e) => {
 
 // Audio toggle functionality
 let audioEnabled = false;
+let audioUnlocked = false;
 const audioToggle = document.getElementById("audioToggle");
 
 audioToggle.addEventListener("click", () => {
   audioEnabled = !audioEnabled;
-  if (!audioEnabled) {
-    audio.currentTime = 5;
+
+  // Unlock audio on iOS on first click
+  if (!audioUnlocked) {
+    audio
+      .play()
+      .then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        audioUnlocked = true;
+      })
   }
+
   audioToggle.innerHTML = audioEnabled
     ? '<img src="unmute.svg" alt="" />'
     : '<img src="mute.svg" alt="" />';
