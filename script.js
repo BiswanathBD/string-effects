@@ -96,6 +96,6 @@ audioToggle.addEventListener("click", () => {
     audio.currentTime = 5;
   }
   audioToggle.innerHTML = audioEnabled
-    ? '<img src="/unmute.svg" alt="" />'
-    : '<img src="/mute.svg" alt="" />';
+    ? '<img src="unmute.svg" alt="" />'
+    : '<img src="mute.svg" alt="" />';
 });
