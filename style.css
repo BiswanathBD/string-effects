@@ -1,25 +1,114 @@
 body {
   width: 100%;
   min-height: 100vh;
-  background-color: black;
+  overflow: hidden;
+  background: linear-gradient(135deg, #212743, #241930);
   margin: 0;
   padding: 0;
-}
-
-h1,
-h2 {
-  width: 90%;
-  margin: 40px auto;
-  color: white;
-  text-align: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 60px auto 40px;
+}
+
+#title span {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #4facfe 75%,
+    #00f2fe 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 3px;
+  animation: gradientShift 4s ease infinite;
+  background-size: 200% 200%;
+  text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  #title span {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+
+  #title {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+h2 {
+  width: 90%;
+  margin: 20px auto;
+  color: white;
+  text-align: center;
+}
+
+#instruction {
+  text-align: center;
+  margin: 30px auto;
+  color: white;
+}
+
+#instruction .hand-emoji {
+  font-size: 3rem;
+  display: inline-block;
+  animation: pointUp 1.5s ease-in-out infinite;
+}
+
+#instruction p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+@keyframes pointUp {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@media (max-width: 768px) {
+  #instruction .hand-emoji {
+    font-size: 2.5rem;
+  }
+
+  #instruction p {
+    font-size: 1rem;
+  }
+}
+
 #audioToggle {
-  display: block;
-  margin: 0px auto 40px auto;
   font-size: 32px;
-  background: rgba(255, 255, 255, 0.20);
+  background: #ffffff19;
   border: none;
   border-radius: 50%;
   width: 60px;
@@ -32,8 +121,9 @@ h2 {
 }
 
 #audioToggle:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff40;
   transform: scale(1.1);
+  rotate: -10deg;
 }
 
 img {
@@ -46,7 +136,9 @@ img {
   max-width: 1000px;
   height: 300px;
   margin: 0 auto;
-  border: 1px solid white;
+  background-color: #ffffff0f;
+  border: 1px solid #ffffff1f;
+  border-radius: 20px;
   touch-action: none;
 }
 
@@ -71,7 +163,7 @@ svg {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: red;
+  background-color: skyblue;
 }
 
 @media (max-width: 768px) {
