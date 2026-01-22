@@ -1,10 +1,21 @@
 let initialpath = "M 10 200 Q 500 200 990 200";
 let string = document.querySelector("#string");
 
+function getRelativePos(e) {
+  const rect = string.getBoundingClientRect();
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top,
+  };
+}
+
 // mouse move event
 string.addEventListener("mousemove", (e) => {
-  let path = `M 10 200 Q ${e.x} ${e.y} 990 200`;
-  console.log(e);
+  let { x, y } = getRelativePos(e);
+  const rect = string.getBoundingClientRect();
+  y = (y / rect.height) * 400;
+
+  let path = `M 10 200 Q ${x} ${y} 990 200`;
   gsap.to("svg path", {
     attr: { d: path },
     duration: 0.3,
@@ -13,6 +24,27 @@ string.addEventListener("mousemove", (e) => {
 
 // mouse leave event
 string.addEventListener("mouseleave", (e) => {
+  gsap.to("svg path", {
+    attr: { d: initialpath },
+    duration: 1.8,
+    ease: "elastic.out(1,0.1)",
+  });
+});
+
+// touch move event
+string.addEventListener("touchmove", (e) => {
+  console.log(e);
+
+  let path = `M 10 200 Q ${e.touches[0].clientX} ${e.touches[0].clientY} 990 200`;
+  console.log(e);
+  gsap.to("svg path", {
+    attr: { d: path },
+    duration: 0.3,
+  });
+});
+
+// mouse leave event
+string.addEventListener("touchend", (e) => {
   gsap.to("svg path", {
     attr: { d: initialpath },
     duration: 1.8,

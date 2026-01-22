@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="cursor"></div>
+    <div id="cursor">
+      <div id="cursor-circle"></div>
+    </div>
     <h1>String Effects with Custom Cursor</h1>
     <div id="string">
-      <svg width="1000px" height="400px">
+      <svg viewBox="0 0 1000 400" preserveAspectRatio="none">
         <path
-          d="M 10 200 Q 500 200 90 200"
+          d="M 10 200 Q 500 200 990 200"
           stroke="tomato"
           fill="transparent"
+          stroke-width="4"
         />
       </svg>
     </div>
